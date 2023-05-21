@@ -1,0 +1,17 @@
+---
+
+- name: close httpd firewall
+  firewalld:
+    service: "{{ apache_firewalld_port }}"
+    permanent: yes
+    state: disabled
+
+- name: remove httpd file
+  file:
+    path: /var/www/html/index.html
+    state: absent
+
+- name: remove httpd packages
+  package:
+    name: "{{ apache_packages }}"
+    state: absent
